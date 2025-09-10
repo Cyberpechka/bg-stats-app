@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="./css.css">
 </head>
 <body>
-    <p>Hello world!!!!</p>
+   <form id="new-player" onsubmit="return whenPressed(this)" method="post">
+    <label>Имя:</label>
+    <input type="text" name="name" placeholder="Имя" id="new_name"><br><br>
+    <input type="submit"  value="Готово">
+   </form>
+   <br>
+   <table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody> 
+        <tr></tr>
+    </tbody>
+   </table>
+    <script src="./javascript.js"></script>
 </body>
 </html>
