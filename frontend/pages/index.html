@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="./css.css">
+    <link rel="stylesheet" type="text/css" href="../css.css">
 </head>
 <body>
    <form id="new-player" onsubmit="return whenPressed(this)" method="post">
     <label>Имя:</label>
-    <input type="text" name="name" placeholder="Имя" id="new_name"><br><br>
-    <input type="submit"  value="Готово">
+    <input type="text" name="name" placeholder="Имя" id="new_name">
+    <input type="submit"  value="Добавить игрока">
    </form>
    <br>
    <table border="1">
@@ -18,12 +18,15 @@
             <th>ID</th>
             <th>Name</th>
             <th>Time</th>
+            <th>Delete</th>
         </tr>
     </thead>
-    <tbody> 
-        <tr></tr>
+    <tbody id="players-table"> 
+        <tr>
+            <td colspan="4">НИКОГО НЕМА</td>
+        </tr>
     </tbody>
    </table>
-    <script src="./javascript.js"></script>
+    <script src="../javascript.js"></script>
 </body>
 </html>

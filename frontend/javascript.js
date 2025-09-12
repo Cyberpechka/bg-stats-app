@@ -1,18 +1,45 @@
-class Player{
-    constructor(name, id, time_when_added){
-        this.name = name;
-        this.id = id;
-        this.time_when_added = time_when_added;
-    }
-    meto
+let players = [];
+let id = 1;
+function creatPlayer(new_name){
+    return{
+        id: id++,
+        name: new_name.trim(),
+        createdAt: new Date().toISOString()
+    };
 }
 
 function whenPressed(info){
-    var date = new Date();
-    var new_player = new Player(info.new_name.value, 1, date)
+    const nameValue = info.elements['name'].value;
+    let new_player = creatPlayer(nameValue);
+    players.push(new_player);
     console.log(new_player.name);
     console.log(new_player.id);
-    console.log(new_player.time_when_added);
-    output.innerHTML = el.value;
+    console.log(new_player.createdAt);
+    nameValue.value = '';
+    updateTable();
     return false;
+}
+
+function deletePlayer(playerID){
+    const playerIndex = players.findIndex(player => player.id === playerID);
+    players.splice(playerIndex,1);
+    updateTable();
+}
+
+function updateTable(){
+    const tbody = document.getElementById('players-table');
+    let tableHTML = '';
+    players.forEach(player =>{
+        const date = new Date(player.createdAt);
+        const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+        tableHTML += `
+        <tr>
+            <td>${player.id}</td>
+            <td>${player.name}</td>
+            <td>${formattedDate}</td>
+            <td><img src="../delet.png" onclick="deletePlayer(${player.id})" class = "delete_btn"></td>
+        </tr>
+        `;
+    });
+    tbody.innerHTML = tableHTML;
 }
