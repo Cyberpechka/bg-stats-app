@@ -1,12 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="./css.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог игр - Статистика настольных игр</title>
 </head>
 <body>
-   
-    <script src="./javascript.js"></script>
+    <div class="app-container">
+        <!-- Навигация уже есть в основном layout -->
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <div class="games-page">
+                <!-- Заголовок -->
+                <div class="games-header">
+                    <h1 class="games-title">🎮 Каталог игр</h1>
+                </div>
+
+                <!-- Основные фильтры -->
+                <div class="games-controls">
+                    <div class="control-group">
+                        <div class="search-group">
+                            <input type="text" id="game-search" placeholder="Поиск игры..." class="search-input">
+                            <button id="apply-filters" class="btn btn-primary">🔍 Применить</button>
+                        </div>
+                        
+                        <select id="players-filter" class="filter-select">
+                            <option value="">Любое кол-во игроков</option>
+                            <option value="1">1 игрок</option>
+                            <option value="2">2 игрока</option>
+                            <option value="3">3 игрока</option>
+                            <option value="4">4 игрока</option>
+                            <option value="5">5+ игроков</option>
+                        </select>
+                        
+                        <select id="time-filter" class="filter-select">
+                            <option value="">Любое время</option>
+                            <option value="30">до 30 мин</option>
+                            <option value="60">до 60 мин</option>
+                            <option value="120">до 120 мин</option>
+                            <option value="121">более 120 мин</option>
+                        </select>
+                        
+                        <select id="sort-select" class="filter-select">
+                            <option value="name">По названию</option>
+                            <option value="rating">По рейтингу</option>
+                            <option value="year">По году</option>
+                            <option value="players">По игрокам</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Статистика Показано X из Y игр -->
+                    <div class="games-stats-controls">
+                        <div class="games-stats">
+                            Показано: <span id="shown-games">0</span> из <span id="total-games">0</span> игр
+                        </div>
+                        <button id="reset-filters" class="btn btn-secondary">🔄 Сбросить все фильтры</button>
+                    </div>
+                </div>
+
+                <!-- Фильтры по тегам -->
+                <div class="tag-filters-section">
+                    <div class="tag-filters-header">
+                        <h3 class="tag-filters-title">🏷️ Фильтр по тегам</h3>
+                    </div>
+                    
+                    <div class="tag-filters-content">
+                        <div id="tag-filters-container"></div>
+                        
+                        <div id="selected-tags" class="selected-tags-compact" style="display: none;">
+                            <span class="selected-tags-label">Выбрано:</span>
+                            <div class="selected-tags-list-compact" id="selected-tags-list"></div>
+                            <button class="clear-tags-btn" onclick="app.gamesCatalog.clearTagFilters()">
+                                ❌ Очистить теги
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="random-game-section">
+                    <button id="random-game-btn" class="btn-random-game">
+                        🎲 Случайная игра
+                    </button>
+                    
+                    <div id="random-game-result" class="random-game-result" style="display: none;">
+                        <!-- Результат будет здесь -->
+                    </div>
+                </div>
+                
+                <!-- Сообщение когда нет игр -->
+                <div id="no-games" class="no-games-message" style="display: none;">
+                    <div class="no-games-icon">🎮</div>
+                    <h3>Игры не найдены</h3>
+                    <p>Попробуйте изменить параметры поиска или выбрать другие теги</p>
+                </div>
+
+                <!-- Сетка игр -->
+                <div id="games-grid" class="games-grid"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Модальное окно деталей игры -->
+    <div id="game-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h2 id="modal-game-title">Название игры</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="modal-game-details">
+                    <!-- Детали игры будут здесь -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../src/app.js"></script>
 </body>
 </html>
